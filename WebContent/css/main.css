@@ -1,0 +1,227 @@
+body{
+	margin:0 auto;
+	padding:10px;
+	min-height:100vh;
+	background-color:wheat;
+	color:#333;
+}
+h1{
+	padding:10px 20px;
+	background-color:#ffd700;
+	font-size:25px;
+	border:1px solid #ffd700;
+	border-radius:20px;
+}
+h2{
+	padding:7px 20px;
+	background-color:#ffd700;
+	font-size:20px;
+	border:1px solid #ffd700;
+	border-radius:20px;
+}
+h3{
+	margin:0 10px;
+	padding:5px 20px;
+	background-color:maroon;
+	width:50vw;
+	color:white;
+	font-size:16px;
+	border:1px solid maroon;
+	border-radius:20px;
+}
+#maincontainer{
+	height:70%;
+	max-width:800px;
+	margin:0 auto;
+
+}
+#dataBox{
+	margin:10px 0;
+	background-color:#8fbc8b;
+	border:2px solid #8fbc8b;
+	border-radius:30px;
+}
+.userdata{
+	margin:10px;
+	}
+.userdata th{
+	padding:0 10px;
+	text-align:center;
+	color:white;
+	background-color:#cd853f;
+	border:2px solid wheat;
+	border-radius:50px;
+}
+.userdata td{
+	padding:5px 10px;
+	text-align:center;
+	background-color:#fffacd;
+	border:2px solid wheat;
+	border-radius:50px;
+}
+.inputform{
+	margin:10px;
+}
+.inputform th{
+	padding:0 10px;
+	text-align:center;
+	color:white;
+	background-color:#ff7f50;
+	border:2px solid wheat;
+	border-radius:50px;
+}
+.inputform td{
+	padding:5px 10px;
+	text-align:center;
+	background-color:#fffacd;
+	border:2px solid wheat;
+	border-radius:50px;
+}
+button{
+	margin:0 15px 15px;
+	border:0;
+	border-radius:50px;
+	background:#87cefa;
+	padding:8px 16px;
+	font-size:16px;
+}
+button:hover{
+	color:white;
+	background:#6495ed;
+}
+.btn{
+	margin:10px 5px 10px;
+	border:0;
+	border-radius:50px;
+	background:#87cefa;
+	padding:8px 16px;
+	font-size:16px;
+}
+.btn:hover{
+	color:white;
+	background:#6495ed;
+}
+.databtn{
+	margin:0 5px;
+	border:0;
+	border-radius:50px;
+	background:#87cefa;
+	padding:8px 8px;
+	font-size:12px;
+}
+.databtn:hover{
+	color:white;
+	background:#6495ed;
+}
+@media screen and (max-width: 600px){
+	#maincontainer{
+		width:100%;
+	}
+	.userdata{
+		width:90%;
+	}
+	.userdata tr{
+		display:flex;
+		flex-flow:row wrap;
+	}
+	.userdata th,td{
+		width:100%;
+	}
+	.inputform tr{
+		display:flex;
+		flex-flow:row wrap;
+	}
+	.inputform th,td{
+		width:100%;
+	}
+	#dateform{
+		width:100%;
+	}
+	#callData{
+		width:100%;
+	}
+	#dataBox{
+		width:90vw;
+	}
+
+}
+#callData{
+	padding:10px 10px;
+	width:250px;
+}
+#dateform{
+	padding:5px 10px;
+	text-align:center;
+	background-color:#fffacd;
+	border:2px solid wheat;
+	border-radius:50px;
+}
+.form{
+	padding:0 10px;
+}
+.dataTable{
+	margin:10px;
+	text-align:center;
+}
+.dataTable th{
+	padding:0 10px;
+	text-align:center;
+	color:white;
+	background-color:#ff7f50;
+	border:2px solid #8fbc8b;
+}
+.dataTable td{
+	padding:5px 10px;
+	text-align:center;
+	background-color:#fffacd;
+	border:2px solid #8fbc8b;
+}
+#updateBtns{
+	margin:10px 3px;
+	padding:0 10px;
+	display:flex;
+	flex-direction:row;
+}
+#graphbox{
+	margin:10px;
+	padding:2px;
+	border:1px solid #fffacd;
+	background-color:#fffacd;
+	border-radius:20px;
+}
+#graph{
+	margin:0 3px 10px;
+	padding:5px 10px;
+	background-color:#fffacd;
+	border:1px solid #fffacd;
+	border-radius:50px;
+}
+/* spanを横並びにしたいのでブロック要素にする */
+#graph span{
+	height:20px;
+	line-height:20px;
+	display:inline-block;
+}
+.target{
+	height:2px;
+}
+.dataspan{
+	margin:10px;
+}
+
+.dataspan span{
+	padding:5px 10px;
+	text-align:center;
+	color:white;
+	background-color:#ff7f50;
+	border:2px solid #8fbc8b;
+	display:inline-block;
+}
+.dataspan .timedata{
+	padding:5px 10px;
+	text-align:center;
+	color:#333;
+	background-color:#fffacd;
+	border:2px solid #8fbc8b;
+	display:inline-block;
+}
