@@ -7,7 +7,7 @@
       driverClassName="com.mysql.jdbc.Driver"
       url="jdbc:mysql://localhost/mycalapp"
       connectionProperties="autoReconnect=true;verifyServerCertificate=false;useSSL=false;requireSSL=false;useUnicode=true;characterEncoding=UTF-8;"
-      username=
-	  password=
+      username="r***"
+	  password="t***********3@"
       validationQuery="select 1"/>
  </Context>

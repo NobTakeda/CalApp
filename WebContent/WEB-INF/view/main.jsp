@@ -13,7 +13,7 @@
 <div id="maincontainer">
 	<h1>カロリー管理アプリへようこそ</h1>
 	<p>必要なデータを入力してください。<br>
-	なお、目標体重に応じた摂取カロリーは<a href="https://keisan.casio.jp/exec/system/1183427246">こちら</a>のサイトから計算できます。</p>
+	なお、目標体重に応じた摂取カロリーは<a href="https://keisan.casio.jp/exec/system/1183427246" target="_blank" rel="noopener noreferrer">こちら</a>のサイトから計算できます。</p>
 	<form action="/calapp/Main" method="post">
 		<table class="userdata">
 			<tr><th>名前</th><td><input type="text" name="name" required></td></tr>

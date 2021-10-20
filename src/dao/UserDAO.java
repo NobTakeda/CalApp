@@ -47,17 +47,17 @@ public class UserDAO {
 			this.disconnect();
 		}
 	}
-	public User register(String userid) {
-		User user=new User();
+	public User registerCheck(User user,String userid) {
+		User resultUser=new User();
 		try {
 			this.connect();
 			ps=db.prepareStatement("SELECT * FROM users(userid)"+"VALUES(?)");
 			ps.setString(1, userid);
-			System.out.println("UserDAO,ID紹介実行"+ps);
+			System.out.println("UserDAO,ID照会実行"+ps);
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				user.setUserid(rs.getString("userid"));
-				user.setUserpass(rs.getString("userpass"));
+				resultUser.setUserid(rs.getString("userid"));
+				resultUser.setUserpass(rs.getString("userpass"));
 			}
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -65,7 +65,7 @@ public class UserDAO {
 		}finally{
 			this.disconnect();
 		}
-		return user;
+		return resultUser;
 	}
 	public void insertOne(User user) {
 		try {
