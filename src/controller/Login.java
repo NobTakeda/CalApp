@@ -39,13 +39,20 @@ public class Login extends HttpServlet {
 
 		//登録ボタンが押されているかの判定。nullなら送信ボタン、値があれば登録ボタンと判定する。
 		String pushedRegisterButton=request.getParameter("registerButton");
-		String registerMassage=null; //Login.jspに返すエラーメッセージ
+		String registerMessage="OK"; //Login.jspに返すエラーメッセージ
 
-		if(pushedRegisterButton==null) {
-			if(user == null) {
-				registerMassage="noUser";
+		if(pushedRegisterButton == null) {
+			if(user == null || user.getUserid() == null) {
+				registerMessage="noUser";
+				System.out.println("例外場所発見用1");
+				request.setAttribute("result",registerMessage);
+				RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+				rd.forward(request,response);
 			}else if(userpass.equals(user.getUserpass()) == false ){
-				registerMassage="diffPass";
+				registerMessage="diffPass";
+				request.setAttribute("result",registerMessage);
+				RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+				rd.forward(request,response);
 			}else {
 			//ID,pass共に合っている場合
 				HttpSession session=request.getSession();
@@ -62,12 +69,11 @@ public class Login extends HttpServlet {
 				RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/makeUser.jsp");
 				rd.forward(request,response);
 			}else {
-				registerMassage=("noOneByte");
+				registerMessage="noOneByte";
+				request.setAttribute("result",registerMessage);
+				RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+				rd.forward(request,response);
 			}
 		}
-		request.setAttribute("result",registerMassage);
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/login.jsp");
-		rd.forward(request,response);
 	}
-
 }
