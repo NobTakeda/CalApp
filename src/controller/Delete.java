@@ -23,11 +23,12 @@ public class Delete extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
 		String date=request.getParameter("date");
+		String userid=request.getParameter("userid");
 		FoodDAO dao=new FoodDAO();
 		if(id != null) {
 			dao.deleteFood(Integer.parseInt(id));
 		}
-		List<Food> list=dao.findToday(date);
+		List<Food> list=dao.findToday(date,userid);
 		request.setAttribute("list",list);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/manage.jsp");
 		rd.forward(request, response);

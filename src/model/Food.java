@@ -11,6 +11,7 @@ public class Food implements Serializable{
 	//0,1,2の順で朝、昼、晩
 	private String date;
 	private String timeStr;
+	private String userid;
 
 	public Food() {}
 	public Food(String name,int cal,int time,String date) {
@@ -19,6 +20,7 @@ public class Food implements Serializable{
 		this.time=time;
 		this.date=date;
 	}
+	//↓useridをセットする時このコンストラクタを使用。timeStrの部分にuseridを入れること。
 	public Food(String name,int cal,int time,String date,String timeStr) {
 		this(name,cal,time,date);
 		this.setTimeStr(timeStr);
@@ -34,6 +36,10 @@ public class Food implements Serializable{
 	public Food(int id,String name,int cal,int time,String date,String timeStr) {
 		this(id,name,cal,time,date);
 		this.timeStr=timeStr;
+	}
+	public Food(int id,String name,int cal,int time,String date,String timeStr,String userid) {
+		this(id,name,cal,time,date,timeStr);
+		this.userid=userid;
 	}
 
 	public String getName() {
@@ -71,6 +77,12 @@ public class Food implements Serializable{
 	}
 	public void setTimeStr(String timeStr) {
 		this.timeStr = timeStr;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 }

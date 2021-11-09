@@ -20,7 +20,7 @@ public class User implements Serializable {
 		this.height=height;
 		this.weight=weight;
 	}
-	public User(int id,String name,Double height,Double weight,Double bmi,int cal,int targetCal,String userid) {
+	public User(int id,String name,Double height,Double weight,Double bmi,int cal,int targetCal,String userid,String userpass) {
 		this.id=id;
 		this.name=name;
 		this.height=height;
@@ -29,6 +29,7 @@ public class User implements Serializable {
 		this.cal=cal;
 		this.targetCal=targetCal;
 		this.userid=userid;
+		this.userpass=userpass;
 	}
 
 	public String getUserid() {

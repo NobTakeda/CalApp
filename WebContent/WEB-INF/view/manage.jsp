@@ -36,7 +36,8 @@
 				<label>晩<input type="radio" name="time" value="2"></label></td></tr>
 			</table>
 			<button type="submit">登録</button>
-			<% if(list !=null){ %>
+			<input type="hidden" name="userid" value="<%= user.getUserid() %>">
+			<% if(list !=null && list.size() > 0){ %>
 				<input type="hidden" name="listDate" value="<%= list.get(0).getDate() %>">
 			<% }else{ }%>
 		</form>
@@ -45,12 +46,13 @@
 			<form action="/calapp/Manage">
 				<div id="dateform">
 					<input type="date" name="date"  required><br>
+					<input type="hidden" name="userid" value="<%= user.getUserid() %>">
 				</div>
 				<button type="submit" class="btn">呼び出し表示</button>
 			</form>
 		</div>
 	</div>
-	<% if(list!=null){ %>
+	<% if(list != null && list.size() > 0){ %>
 		<h2>&#9660;<%= list.get(0).getDate() %>日に食べたもの</h2>
 		<div id="dataBox">
 			<% int sum=0; %>
@@ -64,17 +66,21 @@
 					<form action="/calapp/FoodUpdate">
 						<button type="submit" name="id" value="<%= list.get(i).getId() %>" class="databtn">更新</button>
 						<input type="hidden" name="date" value="<%= list.get(i).getDate() %>">
+						<input type="hidden" name="userid" value="<%= user.getUserid() %>">
 					</form>
 					<form action="/calapp/Delete" method="post">
 						<button type="submit" name="id" value="<%= list.get(i).getId() %>" onclick="return confirm('削除してよろしいですか？')" class="databtn">削除</button>
 						<input type="hidden" name="date" value="<%= list.get(i).getDate() %>">
+						<input type="hidden" name="userid" value="<%= user.getUserid() %>">
 					</form>
 				</div>
 				<% sum+=list.get(i).getCal(); %>
 			<% } %>
 			<h3>&#9660;1日分の合計は<%= sum %>kcalです。登録する場合はこちら</h3>
-			<form action="/calapp/Resister" method="post" class="form">
+			<form action="/calapp/Register" method="post" class="form">
 				<button type="submit" name="date" value="<%= list.get(0).getDate() %>" class="btn">登録</button>
+				<input type="hidden" name="userid" value="<%= user.getUserid() %>">
+				<input type="hidden" name="hideListButton" value="hideListButton">
 			</form>
 		</div>
 	<% }else{ %>
@@ -83,12 +89,14 @@
 		<h2>&#9660;最新7日分のデータを見る</h2>
 		<form action="/calapp/ShowData" class="form">
 			<button type="submit" class="btn">データ閲覧</button>
+			<input type="hidden" name="userid" value="<%= user.getUserid() %>">
 		</form>
 		<h2>&#9660;指定した日付から30日前までの登録データをJsonで出力</h2>
 		<div id="callData">
 			<form action="/calapp/MakeResult" target="_blank" method="post">
 				<div id="dateform">
 					<input type="date" name="date" required><br>
+					<input type="hidden" name="userid" value="<%= user.getUserid() %>">
 				</div>
 				<button type="submit" class="btn">別タブで開く</button>
 			</form>

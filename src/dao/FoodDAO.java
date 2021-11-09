@@ -49,16 +49,17 @@ public class FoodDAO {
 			this.disconnect();
 		}
 	}
-	public void insertOne(Food food) {
+	public void insertOne(Food food,String userid) {
 		try {
 			this.connect();
-			ps=db.prepareStatement("INSERT INTO foods(name,cal,time_id,updated)"
-					+ " VALUES(?,?,?,?)");
+			ps=db.prepareStatement("INSERT INTO foods(name,cal,time_id,updated,userid)"
+					+ " VALUES(?,?,?,?,?)");
 			ps.setString(1, food.getName());
 			ps.setInt(2, food.getCal());
 			ps.setInt(3, food.getTime());
 			ps.setString(4, food.getDate());
-			System.out.println("insertOne実行"+ps);
+			ps.setString(5, userid);
+			System.out.println("FoodDAO,insertOne実行"+ps);
 			ps.execute();
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -67,12 +68,13 @@ public class FoodDAO {
 			this.disconnect();
 		}
 	}
-	public Food findOne(int id) {
+	public Food findOne(int id,String userid) {
 		Food food=null;
 		try{
 			this.connect();
-			ps=db.prepareStatement("SELECT * FROM foods WHERE id=?");
+			ps=db.prepareStatement("SELECT * FROM foods WHERE id=? AND userid=?");
 			ps.setInt(1, id);
+			ps.setString(2, userid);
 			System.out.println("findOne実行"+ps);
 			rs=ps.executeQuery();
 			if(rs.next()) {
@@ -81,7 +83,8 @@ public class FoodDAO {
 				int cal=rs.getInt("cal");
 				int time=rs.getInt("time_id");
 				String date=rs.getString("updated");
-				food=new Food(idNum,name,cal,time,date);
+				String user_id=rs.getString("userid");
+				food=new Food(idNum,name,cal,time,date,user_id);
 			}
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -105,7 +108,8 @@ public class FoodDAO {
 				int cal=rs.getInt("cal");
 				int time=rs.getInt("time_id");
 				String date=rs.getString("updated");
-				list.add(new Food(id,name,cal,time,date));
+				String userid=rs.getString("userid");
+				list.add(new Food(id,name,cal,time,date,userid));
 			}
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -116,12 +120,13 @@ public class FoodDAO {
 		return list;
 	}
 	//指定した日付に登録したFoodを全て返すメソッド
-	public List<Food> findToday(String date){
+	public List<Food> findToday(String date,String userid){
 		List<Food> list=new ArrayList<>();
 		try {
 			this.connect();
-			ps=db.prepareStatement("SELECT * FROM foods WHERE updated=? ORDER BY time_id ASC");
+			ps=db.prepareStatement("SELECT * FROM foods WHERE updated=? AND userid=? ORDER BY time_id ASC");
 			ps.setString(1, date);
+			ps.setString(2, userid);
 			System.out.println("FindToday実行"+ps);
 			rs=ps.executeQuery();
 			while(rs.next()) {
@@ -142,7 +147,7 @@ public class FoodDAO {
 					timeStr="晩";
 					break;
 				}
-				list.add(new Food(id,name,cal,time,updated,timeStr));
+				list.add(new Food(id,name,cal,time,updated,timeStr,userid));
 			}
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -152,15 +157,16 @@ public class FoodDAO {
 		}
 		return list;
 	}
-	public void updateFood(Food food) {
+	public void updateFood(Food food,String userid) {
 		try {
 			this.connect();
-			ps=db.prepareStatement("UPDATE foods SET name=?,cal=?,time_id=?,updated=? WHERE id=?");
+			ps=db.prepareStatement("UPDATE foods SET name=?,cal=?,time_id=?,updated=? WHERE id=? AND userid=?");
 			ps.setString(1, food.getName());
 			ps.setInt(2, food.getCal());
 			ps.setInt(3, food.getTime());
 			ps.setString(4, food.getDate());
 			ps.setInt(5, food.getId());
+			ps.setString(6, userid);
 			System.out.println("updateFood:foodテーブル更新"+ps);
 			ps.executeUpdate();
 		} catch (NamingException | SQLException e) {

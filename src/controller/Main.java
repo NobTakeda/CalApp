@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDAO;
 import model.User;
 import model.UserLogic;
 
@@ -31,7 +32,14 @@ public class Main extends HttpServlet {
 		user.setTargetCal(targetCal);
 		UserLogic ul=new UserLogic();
 		ul.execute(user);
-		//ここまででユーザーデータ作成
+		String userid=request.getParameter("userid");
+		String userpass=request.getParameter("userpass");
+		user.setUserid(userid);
+		user.setUserpass(userpass);
+		//ここまででユーザーデータ作成、DAOを呼び出してusersテーブルを更新
+		UserDAO dao=new UserDAO();
+		dao.updateUser(user);
+
 		HttpSession session=request.getSession();
 		session.setAttribute("user", user);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/manage.jsp");

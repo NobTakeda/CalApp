@@ -67,6 +67,19 @@ public class UserDAO {
 		}
 		return resultUser;
 	}
+	public void insertNewUser(User user) {
+		try {
+			this.connect();
+			ps=db.prepareStatement("INSERT INTO users(userid,userpass)" + "VALUES(?,?)");
+			ps.setString(1, user.getUserid());
+			ps.setString(2, user.getUserpass());
+			System.out.println("UserDAO,idとpassのみ登録実行" + ps);
+			ps.execute();
+		} catch (NamingException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
 	public void insertOne(User user) {
 		try {
 			this.connect();
@@ -89,29 +102,54 @@ public class UserDAO {
 			this.disconnect();
 		}
 	}
-	public User findOne(int userid) {
+	public User findOne(String userid) {
 		User user=null;
 		try{
 			this.connect();
 			ps=db.prepareStatement("SELECT * FROM users WHERE userid=?");
-			ps.setInt(1, userid);
+			ps.setString(1, userid);
 			System.out.println("UserDAO,findOne実行"+ps);
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				int idNum=rs.getInt("id");
-				String name=rs.getString("name");
-				Double height=rs.getDouble("height");
-				Double weight=rs.getDouble("weight");
-				Double bmi=rs.getDouble("bmi");
-				int cal=rs.getInt("cal");
-				int targetCal=rs.getInt("targetcal");
 				String user_id=rs.getString("userid");
-				user=new User(idNum,name,height,weight,bmi,cal,targetCal,user_id);
+				if(user_id == null) {
+					System.out.println("UserDAO,findOneでIDが見つかりません");
+				}else {
+					int idNum=rs.getInt("id");
+					String name=rs.getString("name");
+					Double height=rs.getDouble("height");
+					Double weight=rs.getDouble("weight");
+					Double bmi=rs.getDouble("bmi");
+					int cal=rs.getInt("cal");
+					int targetCal=rs.getInt("targetcal");
+					String userpass=rs.getString("userpass");
+					user=new User(idNum,name,height,weight,bmi,cal,targetCal,user_id,userpass);
+				}
 			}
 		} catch (NamingException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		return user;
+	}
+	public void updateUser(User user) {
+		try {
+			this.connect();
+			ps=db.prepareStatement("UPDATE users SET name=?,height=?,weight=?,bmi=?,cal=?,targetcal=? WHERE userid=?");
+			ps.setString(1, user.getName());
+			ps.setDouble(2, user.getHeight());
+			ps.setDouble(3, user.getWeight());
+			ps.setDouble(4, user.getBmi());
+			ps.setInt(5, user.getCal());
+			ps.setInt(6, user.getTargetCal());
+			ps.setString(7, user.getUserid());
+			System.out.println("updateUser:usersテーブル更新"+ps);
+			ps.executeUpdate();
+		} catch (NamingException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			this.disconnect();
+		}
 	}
 }

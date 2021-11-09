@@ -1,0 +1,54 @@
+2021/11/7(Sun)
+1日分の食事をmealsテーブルに登録する際、updatedがユニークになっていた為
+別のユーザーで登録できなかった。カラムの属性を修正。
+login.javaのぬるぽ修正。
+makeUser.jspの分岐修正。
+CSS設定。
+やること >> ログアウト処理の実装
+		>> VPSへの実装など
+
+2021/11/5(Fri)
+ログイン処理を伴う改修、大体終了。
+試験用MySQLへの登録、ユーザーごとのデータ閲覧は可能になった。
+やること >> ログアウト処理の実装
+		>> CSSを当てる
+		>> VPSへの実装、ポートフォリオサイトの更新などなど
+
+2021/11/2(Tue)
+FoodDAOのクエリ等改修。
+試験用MySQLのfoods,mealsテーブルへのuserid追加
+manage.jspのform改修
+やること>> それに伴うManage.javaのDAO使用メソッドの引数やらMealsDAOのクエリ改修やら。
+		>>cssは後回し
+
+2021/11/1(Mon)
+Javaの問題でハマって時間が取れなくなったので少しだけ更新。
+・model/food,Mealsのフィールドとコンストラクタ改修
+・manage.jspのform内情報改修
+・manage.javaからの遷移先、各DAOはこれから
+
+2021/10/30(Sat)
+Main.javaによるusersテーブル更新まで確認。
+やること>> foods,mealsテーブルにuseridを紐付けるように改修
+		>>Manage.java等でデータを登録、呼び出しなどする際、useridを紐付けるように改修
+
+2021/10/29(Fri)
+色々やったけど書き忘れていたこと。
+・MakeUser.java,makeUser.jspの中身を書く
+・UserDAOのinsertOne()改修、updateUser()追加
+・新しいユーザーデータの追加に合わせてMain.javaのpost改修
+・試験用MySQLにテーブルを作り、ユーザーデータを登録するまでの動作確認
+	>>>makeUser.jspからMakeUser.javaの遷移が上手くいかず試行錯誤する。
+	>>>ファイル名をいじった後のクラスファイルの参照などが上手くいっていないっぽい？
+		プロジェクトをクリーンしたらエラーが出ずに遷移するようになった。
+・テストデータベースへの新規ユーザー登録までは成功。その後のjspから何から全ての見直し&改修が必要。
+
+2021/10/22(Fri)
+Login.java改修 >> 送信、登録判別＆id,passの紹介
+MySQL >> userテーブル作成
+やること>> テーブルに合わせてDAOのQuery改修、makeUser.jspの中身。css等は後
+				>> 動作確認の上、自サーバーに実装
+
+2021/10/19(Tue)
+Login.java改修、makeUser.jsp,makeUser.java追加
+やること>>Tableのパラメータを改めて新規作成、UserDAO ,FoodDAO ,MealsDAO,ResultDAOのQuery改修

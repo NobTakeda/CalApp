@@ -27,5 +27,6 @@ public class MealsLogic {
 		meals.setSupperCal(sCal);
 		meals.setTotalCal(tCal);
 		meals.setDate(date);
+		meals.setUserid(list.get(0).getUserid());
 	}
 }

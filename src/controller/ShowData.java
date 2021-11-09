@@ -18,8 +18,10 @@ public class ShowData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userid=request.getParameter("userid");
+		System.out.println("ShowData.java内：ユーザーIDは"+userid);
 		MealsDAO dao=new MealsDAO();
-		List<Meals> mealsList=dao.findWeek();
+		List<Meals> mealsList=dao.findWeek(userid);
 		request.setAttribute("list", mealsList);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/showdata.jsp");
 		rd.forward(request, response);

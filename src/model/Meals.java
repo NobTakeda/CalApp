@@ -9,6 +9,7 @@ public class Meals implements Serializable{
 	private int totalCal;
 	private String date;
 	private int id;
+	private String userid;
 
 	public Meals(){
 	}
@@ -26,6 +27,11 @@ public class Meals implements Serializable{
 		this(breakfastCal,lunchCal,supperCal,totalCal,date);
 		this.id=id;
 	}
+	public Meals(int id,int breakfastCal,int lunchCal,int supperCal,int totalCal,String date,String userid) {
+		this(id,breakfastCal,lunchCal,supperCal,totalCal,date);
+		this.userid=userid;
+	}
+
 	public int getBreakfastCal() {
 		return breakfastCal;
 	}
@@ -61,6 +67,12 @@ public class Meals implements Serializable{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 }
