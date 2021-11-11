@@ -31,6 +31,7 @@ public class MakeResult extends HttpServlet {
 		String dateStr=request.getParameter("date");
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		String msg="";
+		String userid=request.getParameter("userid");
 		try {
 			Date date=dateFormat.parse(dateStr);
 			//formから取得したdateStrをcalendarに詰める
@@ -43,7 +44,7 @@ public class MakeResult extends HttpServlet {
 
 			ResultDAO dao=new ResultDAO();
 			//データの登録されているupdate、件数をlistに格納
-			List<Result> list=dao.findCount(dateStr,calcDate);
+			List<Result> list=dao.findCount(dateStr,calcDate,userid);
 			List<Result> toJsonList=new ArrayList<>();
 			if(list.size()<1) {
 				response.setContentType("application/json;charset=UTF-8");
@@ -53,7 +54,7 @@ public class MakeResult extends HttpServlet {
 				//listの回数だけ回し、日毎のデータを取り出す
 				for(int i=0;i<list.size();i++) {
 					//resultListに日毎のデータを全て詰める
-					List<Result> resultList=dao.findData(list.get(i).getUpdated());
+					List<Result> resultList=dao.findData(list.get(i).getUpdated(),userid);
 					for(int j=0;j<list.get(i).getCount();j++) {
 						toJsonList.add(resultList.get(j));
 					}

@@ -49,7 +49,7 @@ public class ResultDAO {
 			this.disconnect();
 		}
 	}
-	public List<Result> findCount(String date,String calcDate) {
+	public List<Result> findCount(String date,String calcDate,String userid) {
 		List<Result> list=new ArrayList<>();
 		try {
 			this.connect();
@@ -57,11 +57,14 @@ public class ResultDAO {
 					"JOIN meals\n" +
 					"ON foods.updated=meals.updated\n" +
 					"WHERE\n" +
+					"foods.userid=? AND\n" +
 					"foods.updated BETWEEN\n" +
 					"? AND ?\n" +
 					"GROUP BY foods.updated;");
-			ps.setString(1, calcDate);
-			ps.setString(2, date);
+			ps.setString(1, userid);
+			ps.setString(2, calcDate);
+			ps.setString(3, date);
+
 			System.out.println(ps);
 			rs=ps.executeQuery();
 			while(rs.next()) {
@@ -83,7 +86,7 @@ public class ResultDAO {
 		return list;
 
 	}
-	public List<Result> findData(String date) {
+	public List<Result> findData(String date,String userid) {
 		List<Result> resultList=new ArrayList<>();
 
 		try {
@@ -91,10 +94,11 @@ public class ResultDAO {
 			ps=db.prepareStatement("SELECT * FROM foods\n" +
 					"JOIN meals\n" +
 					"ON foods.updated=meals.updated\n" +
-					"WHERE foods.updated =?\n" +
+					"WHERE foods.updated =? AND foods.userid=?\n" +
 					"ORDER BY foods.updated ASC,time_id ASC;");
 			ps.setString(1, date);
-			//System.out.println("ResultDAO内、findDATA実行:"+ps);
+			ps.setString(2, userid);
+			System.out.println("ResultDAO内、findDATA実行:"+ps);
 			rs=ps.executeQuery();
 
 			while(rs.next()) {
